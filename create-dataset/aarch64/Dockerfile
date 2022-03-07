@@ -1,5 +1,8 @@
 # buildah bud --build-arg OPENCV_VERSION=4.5.5 -t create-dataset .
+# https://danmanners.com/posts/2022-01-buildah-multi-arch/
 FROM quay.io/centos/arm64v8:stream8
+
+# v4l-utils rpm for aarch64 not installed
 
 LABEL version=1.0
 LABEL maintainer="jadebustos@gmail.com"
@@ -28,14 +31,14 @@ RUN set -ex \
         kernel-headers \
     && dnf -q install epel-release -y \
     && dnf config-manager --set-enabled powertools \
-    && dnf -q install -y hdf5 openjpeg2 openjpeg2-devel \
+    && dnf install -y hdf5 openjpeg2 openjpeg2-devel \
         eigen3 openblas openblas-devel protobuf \
         protobuf-devel tesseract tesseract-devel \
-        tesseract-langpack-por v4l-utils\
-    && wget -q https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip -O opencv.zip \
-    && wget -q https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O opencv_contrib.zip \
-    && unzip -qq opencv.zip -d /opt && rm -rf opencv.zip \
-    && unzip -qq opencv_contrib.zip -d /opt && rm -rf opencv_contrib.zip \
+        tesseract-langpack-por \
+    && wget --no-check-certificate https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip -O opencv.zip \
+    && wget --no-check-certificate https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O opencv_contrib.zip \
+    && unzip opencv.zip -d /opt && rm -rf opencv.zip \
+    && unzip opencv_contrib.zip -d /opt && rm -rf opencv_contrib.zip \
     && cmake \
         -D CMAKE_BUILD_TYPE=RELEASE \
         -D CMAKE_INSTALL_PREFIX=/usr \
@@ -96,7 +99,6 @@ RUN set -ex \
         tesseract-devel \
         kernel-headers \
         remove epel-release \
-        okay-release-1-5 \
     && dnf -q clean all \
     && mkdir -p /srv/video/output
 
