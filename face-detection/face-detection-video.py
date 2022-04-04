@@ -12,6 +12,7 @@ import sys
 cascPath = sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
 
+# toshiba dev=1
 video_capture = cv2.VideoCapture(1)
 
 while True:
