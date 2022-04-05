@@ -98,10 +98,12 @@ RUN set -ex \
         tbb-devel \
         protobuf-devel \
         tesseract-devel \
-        python3-devel \
+ #       python3-devel \
         kernel-headers \
     && dnf -q remove epel-release -y \
     && dnf -q clean all 
 
 USER video
-WORKDIR /home/video
+#WORKDIR /home/video
+
+COPY haarcascade_frontalface_default.xml face-detection-video.py /home/video
