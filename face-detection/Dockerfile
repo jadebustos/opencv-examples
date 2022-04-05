@@ -2,6 +2,8 @@
 # https://github.com/dkimg/opencv/blob/master/fedora/Dockerfile
 
 # buildah bud --build-arg OPENCV_VERSION=4.5.5 -t opencv .
+# podman run --rm -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
+# cv2.error: OpenCV(4.5.5) /opt/opencv-4.5.5/modules/imgproc/src/color.cpp:182: error: (-215:Assertion failed) !_src.empty() in function 'cvtColor'
 
 FROM quay.io/centos/centos:stream8
 
