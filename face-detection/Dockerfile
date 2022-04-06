@@ -112,4 +112,4 @@ RUN set -ex \
 #USER video
 #WORKDIR /home/video
 
-COPY haarcascade_frontalface_default.xml face-detection-video.py /home/video
+COPY haarcascade_frontalface_default.xml face-detection-video.py /home/video/

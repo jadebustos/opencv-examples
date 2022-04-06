@@ -15,35 +15,45 @@ def face_detection(video):
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     # toshiba dev=1
-    video_capture = cv2.VideoCapture(videoDev)
+    try:
+        video_capture = cv2.VideoCapture(videoDev)
+    except:
+        print("Error opening video device")
 
-    while True:
-        # Capture frame-by-frame
-        ret, frame = video_capture.read()
+    if video_capture.isOpened():
+        while True:
+            # Capture frame-by-frame
+            ret, frame = video_capture.read()
         
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        faces = faceCascade.detectMultiScale(
-            gray,
-            scaleFactor=1.1,
-            minNeighbors=5,
-            minSize=(30, 30),
-            )
+            faces = faceCascade.detectMultiScale(
+                    gray,
+                    scaleFactor=1.1,
+                    minNeighbors=5,
+                    minSize=(30, 30),
+                    )
 
-        # Draw a rectangle around the faces
-        for (x, y, w, h) in faces:
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            # Draw a rectangle around the faces
+            for (x, y, w, h) in faces:
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-        # Display the resulting frame
-        cv2.imshow('Video', frame)
-        cv2.imwrite("frame.jpg", frame[y:y+h, x:x+w])
+            # Display the resulting frame
+            cv2.imshow('Video', frame)
+            # in case some variable is not defined, no face detected
+            try:
+                cv2.imwrite("frame.jpg", frame[y:y+h, x:x+w])
+            except:
+                pass
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
-    # When everything is done, release the capture
-    video_capture.release()
-    cv2.destroyAllWindows()
+        # When everything is done, release the capture
+        video_capture.release()
+        cv2.destroyAllWindows()
+    else:
+        print("Error opening video device")
 
 if __name__ == "__main__":
     face_detection(sys.argv[1])
