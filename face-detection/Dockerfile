@@ -5,6 +5,11 @@
 # podman run --rm -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
 # cv2.error: OpenCV(4.5.5) /opt/opencv-4.5.5/modules/imgproc/src/color.cpp:182: error: (-215:Assertion failed) !_src.empty() in function 'cvtColor'
 
+# podman run --rm --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
+# python3 -c "import cv2;print(cv2.VideoCapture(6).isOpened())"
+# https://stackoverflow.com/questions/44852484/access-webcam-using-opencv-python-in-docker
+# https://registry.hub.docker.com/r/romankspb/webcam
+
 FROM quay.io/centos/centos:stream8
 
 LABEL version=1.0
@@ -50,14 +55,14 @@ RUN set -ex \
         -D OPENCV_ENABLE_NONFREE=ON \
         -D WITH_JPEG=ON \
         -D WITH_PNG=ON \
-        -D WITH_TIFF=ON \
-        -D WITH_WEBP=ON \
+        -D WITH_TIFF=OFF \
+        -D WITH_WEBP=OFF \
         -D WITH_JASPER=ON \
         -D WITH_EIGEN=ON \
         -D WITH_TBB=ON \
         -D WITH_LAPACK=ON \
         -D WITH_PROTOBUF=ON \
-        -D WITH_V4L=OFF \
+        -D WITH_V4L=ON \
         -D WITH_GSTREAMER=OFF \
         -D WITH_GTK=OFF \
         -D WITH_QT=OFF \
@@ -86,7 +91,7 @@ RUN set -ex \
         /opt/opencv-${OPENCV_VERSION} \
     && make -j$(nproc) \
     && make install \
-    && rm -rf /opt/build/* \
+#    && rm -rf /opt/build/* \
     && rm -rf /opt/opencv-${OPENCV_VERSION} \
     && rm -rf /opt/opencv_contrib-${OPENCV_VERSION} \
     && dnf -q remove -y \
@@ -100,12 +105,11 @@ RUN set -ex \
         tbb-devel \
         protobuf-devel \
         tesseract-devel \
- #       python3-devel \
         kernel-headers \
     && dnf -q remove epel-release -y \
     && dnf -q clean all 
 
-USER video
+#USER video
 #WORKDIR /home/video
 
 COPY haarcascade_frontalface_default.xml face-detection-video.py /home/video
