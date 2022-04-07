@@ -8,14 +8,14 @@
 
 import argparse
 import cv2
-import sys
 
 def face_detection(args):
     videoDev = int(args['device'])
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    # toshiba dev=1
+    # toshiba dev=1 (internal)
+    # ramanujan dev=2 (logitech)
     try:
         video_capture = cv2.VideoCapture(videoDev)
     except:
