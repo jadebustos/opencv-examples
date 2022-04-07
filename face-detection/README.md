@@ -27,7 +27,7 @@ True
 
 Which will inform you if the webcan can be used.
 
-## Looking information for your cameras
+## Looking for information about your camera(s)
 
 ```console
 [jadebustos@archimedes face-detection]$ v4l2-ctl --list-devices
