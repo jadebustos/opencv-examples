@@ -6,6 +6,7 @@
 # https://realpython.com/face-recognition-with-python/
 # https://github.com/shantnu/PyEng
 
+import argparse
 import cv2
 import sys
 
@@ -39,15 +40,17 @@ def face_detection(video):
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
             # Display the resulting frame
-            cv2.imshow('Video', frame)
+            if [ args['graphical'] ]:
+                cv2.imshow('Video', frame)
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
             # in case some variable is not defined, no face detected
             try:
                 cv2.imwrite("frame.jpg", frame[y:y+h, x:x+w])
             except:
                 pass
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
 
         # When everything is done, release the capture
         video_capture.release()
@@ -56,4 +59,11 @@ def face_detection(video):
         print("Error opening video device")
 
 if __name__ == "__main__":
-    face_detection(sys.argv[1])
+
+    parser = argparse.ArgumentParser(description="Just an example",
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("-d", "--device", type=int, required=True, help="video device index")
+    parser.add_argument("-g", "--graphical", action="store_true", help="graphical")
+    args = parser.parse_args()
+
+    face_detection(vars(args))
