@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
 # https://realpython.com/face-detection-in-python-using-a-webcam/
-
 # https://realpython.com/traditional-face-detection-python/
 # https://realpython.com/face-recognition-with-python/
-# https://github.com/shantnu/PyEng
 
 import argparse
 import cv2
@@ -14,7 +12,7 @@ def face_detection(args):
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    # toshiba dev=1 (internal)
+    # gauss dev=1 (internal)
     # ramanujan dev=2 (logitech)
     # archimedes dev=5 (logitech)
     try:
@@ -47,7 +45,7 @@ def face_detection(args):
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-            # in case some variable is not defined, no face detected
+            # when no face detected the following crashes
             try:
                 cv2.imwrite("frame.jpg", frame[y:y+h, x:x+w])
             except:

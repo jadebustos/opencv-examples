@@ -1,11 +1,3 @@
-# https://forums.developer.nvidia.com/t/how-to-connect-a-camera-in-docker/111931/4
-# https://github.com/dkimg/opencv/blob/master/fedora/Dockerfile
-
-# buildah bud --build-arg OPENCV_VERSION=4.5.5 -t opencv .
-# podman run --rm --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
-  # con root funciona la camara
-# python3 -c "import cv2;print(cv2.VideoCapture(6).isOpened())"
-
 FROM quay.io/centos/centos:stream8
 
 LABEL version=1.0
@@ -109,4 +101,4 @@ WORKDIR /srv/video
 
 COPY haarcascade_frontalface_default.xml face-detection-video.py /srv/video
 
-ENTRYPOINT ["python3 face-detection-video.py --device ${VIDEO_INDEX}"]
+ENTRYPOINT ["python3 /srv/video/face-detection-video.py --device ${VIDEO_INDEX}"]
