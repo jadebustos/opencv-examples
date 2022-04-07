@@ -10,8 +10,8 @@ import argparse
 import cv2
 import sys
 
-def face_detection(video):
-    videoDev = int(video)
+def face_detection(args):
+    videoDev = int(args['device'])
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
 
@@ -40,7 +40,7 @@ def face_detection(video):
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
             # Display the resulting frame
-            if [ args['graphical'] ]:
+            if args['graphical'] == True:
                 cv2.imshow('Video', frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
