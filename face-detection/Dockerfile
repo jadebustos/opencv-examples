@@ -2,13 +2,9 @@
 # https://github.com/dkimg/opencv/blob/master/fedora/Dockerfile
 
 # buildah bud --build-arg OPENCV_VERSION=4.5.5 -t opencv .
-# podman run --rm -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
-# cv2.error: OpenCV(4.5.5) /opt/opencv-4.5.5/modules/imgproc/src/color.cpp:182: error: (-215:Assertion failed) !_src.empty() in function 'cvtColor'
-
 # podman run --rm --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv /bin/bash
+  # con root funciona la camara
 # python3 -c "import cv2;print(cv2.VideoCapture(6).isOpened())"
-# https://stackoverflow.com/questions/44852484/access-webcam-using-opencv-python-in-docker
-# https://registry.hub.docker.com/r/romankspb/webcam
 
 FROM quay.io/centos/centos:stream8
 
@@ -18,10 +14,10 @@ LABEL maintainer="jadebustos@gmail.com"
 #LABEL description=
 #LABEL url=
 
+ENV VIDEO_INDEX=0
+
 ARG OPENCV_VERSION
 WORKDIR /opt/build
-
-RUN useradd -ms /bin/bash -md /home/video -g video -G video video
 
 RUN set -ex \
     && dnf -q upgrade --refresh -y \
@@ -91,7 +87,7 @@ RUN set -ex \
         /opt/opencv-${OPENCV_VERSION} \
     && make -j$(nproc) \
     && make install \
-#    && rm -rf /opt/build/* \
+    && rm -rf /opt/build/* \
     && rm -rf /opt/opencv-${OPENCV_VERSION} \
     && rm -rf /opt/opencv_contrib-${OPENCV_VERSION} \
     && dnf -q remove -y \
@@ -109,7 +105,8 @@ RUN set -ex \
     && dnf -q remove epel-release -y \
     && dnf -q clean all 
 
-#USER video
-#WORKDIR /home/video
+WORKDIR /srv/video
 
-COPY haarcascade_frontalface_default.xml face-detection-video.py /home/video/
+COPY haarcascade_frontalface_default.xml face-detection-video.py /srv/video
+
+ENTRYPOINT ["python3 face-detection-video.py --device ${VIDEO_INDEX}"]

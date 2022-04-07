@@ -16,6 +16,7 @@ def face_detection(args):
 
     # toshiba dev=1 (internal)
     # ramanujan dev=2 (logitech)
+    # archimedes dev=5 (logitech)
     try:
         video_capture = cv2.VideoCapture(videoDev)
     except:
