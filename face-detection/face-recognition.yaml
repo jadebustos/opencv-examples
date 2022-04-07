@@ -37,26 +37,26 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: face-recognition
   namespace: face-recognition
   labels:
-    app: webapp
+    app: face-recognition
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapp
+      app: face-recognition
   template:
     metadata:
       labels:
-        app: webapp
+        app: face-recognition
     spec:
       containers:
-      - name: webapp
-        image: quay.io/rhte_2019/face-recognition:latest
+      - name: face-recognition
+        image: quay.io/rhte_2019/face-recognition:v2
         env:
         - name: VIDEO_INDEX
-          value: 0
+          value: '0'
         volumeMounts:
         - name: devfs
           mountPath: /dev
@@ -69,5 +69,3 @@ spec:
       - name: devpts
         hostPath:
           path: /dev/pts
-
-#/dev/:/dev:rslave --mount type=devpts,destination=/dev/pts
