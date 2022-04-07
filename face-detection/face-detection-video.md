@@ -12,4 +12,6 @@ To execute:
 ```console
 $ python face-detection-video.py --device 0
 ```
+At this point when a face is detected the face is stored in a file named **frame.jpg** in the same directory where the script is stored.
 
+You can copy it from the running container using the podman **cp** command.
