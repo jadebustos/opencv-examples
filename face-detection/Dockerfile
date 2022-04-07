@@ -99,6 +99,7 @@ RUN set -ex \
 
 WORKDIR /srv/video
 
-COPY haarcascade_frontalface_default.xml face-detection-video.py /srv/video
+COPY entrypoint.sh haarcascade_frontalface_default.xml face-detection-video.py /srv/video
+RUN chmod 0555 /srv/video/entrypoint.sh
 
-#ENTRYPOINT ["python3 /srv/video/face-detection-video.py --device ${VIDEO_INDEX}"]
+ENTRYPOINT ["./entrypoint.sh"]

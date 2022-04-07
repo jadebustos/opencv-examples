@@ -13,7 +13,7 @@ This will create the container image using a CentOS Stream 8 image and **OpenCV 
 To run the container:
 
 ```console
-$ podman run --rm --env VIDEO_INDEX=5 --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -it localhost/opencv
+$ podman run --rm --env VIDEO_INDEX=5 --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -d localhost/opencv
 ```
 
 * **VIDEO_INDEX** is the video index device for the webcam you want to use. In this case the **/dev/video5** was used.
