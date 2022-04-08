@@ -9,7 +9,7 @@ It has to parameters:
 
 ![](imgs/troubleshoot.png)
 
-When in graphical mode use **q** to quit.
+> ![TIP](../imgs/tip-icon.png) When in graphical mode use **q** to quit.
 
 To execute the application:
 
