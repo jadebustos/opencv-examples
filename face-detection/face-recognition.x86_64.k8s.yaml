@@ -56,7 +56,7 @@ spec:
         image: quay.io/rhte_2019/face-recognition:v3
         env:
         - name: VIDEO_INDEX
-          value: '0'
+          value: '0' # /dev/video0
         volumeMounts:
         - name: dev-video0
           mountPath: /dev/video0
