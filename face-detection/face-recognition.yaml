@@ -53,19 +53,16 @@ spec:
     spec:
       containers:
       - name: face-recognition
-        image: quay.io/rhte_2019/face-recognition:v2
+        image: quay.io/rhte_2019/face-recognition:v3
         env:
         - name: VIDEO_INDEX
           value: '0'
         volumeMounts:
-        - name: devfs
-          mountPath: /dev
-        - name: devpts
-          mountPath: /dev/pts
+        - name: dev-video0
+          mountPath: /dev/video0
+        securityContext:
+          privileged: true
       volumes:
-      - name: devfs
+      - name: dev-video0
         hostPath:
-          path: /dev
-      - name: devpts
-        hostPath:
-          path: /dev/pts
+          path: /dev/video0          
