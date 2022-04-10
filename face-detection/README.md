@@ -2,7 +2,7 @@
 
 This directory contains code to create a container to run an application to recognize people with the aim to authenticate users.
 
-## Running the container image using Podman
+## Creating and running the container image using Podman
 
 To create the container:
 
@@ -37,7 +37,7 @@ Before deploying the container you will need to configure the video device confi
     spec:
       containers:
       - name: face-recognition
-        image: quay.io/rhte_2019/face-recognition:v3
+        image: quay.io/rhte_2019/face-recognition:v1
         env:
         - name: VIDEO_INDEX
           value: '0' # /dev/video0
