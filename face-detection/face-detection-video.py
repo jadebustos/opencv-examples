@@ -48,8 +48,8 @@ def face_detection(args):
             # when no face detected the following crashes
             try:
                 cv2.imwrite("frame.jpg", frame[y:y+h, x:x+w])
-            except:
-                pass
+            except Exception as e:
+                print(e)
 
         # When everything is done, release the capture
         video_capture.release()
