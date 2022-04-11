@@ -1,1 +1,21 @@
 # create-dataset.py
+
+This script will use a webcam to create a dataset of your face.
+
+To use in standalone mode you will need to have installed OpenCV in your laptop. [README.md](A container is provider to use it).
+
+To execute it:
+
+```console
+$ python create-dataset.py --device 5 --modulus 7 --range 101 --output_dir /home/jadebustos/working/demo-ai/
+```
+
+where there are two mandatory arguments:
+
+* **--device 5** indicates de video device to be used. In this case **/dev/video5**. [Check this](../face-detection/face-detection-video.md) for more information.
+* **--output_dir /home/jadebustos/working/demo-ai/** the local directory where to store the images from the webcam.
+
+and there are two optional arguments. These arguments are used to randomly record images:
+
+* **--range 101** a random number in the range 1 to this vale is choosen.
+* **--modulus 7** when a random number modulus this value is zero a image is recordered.

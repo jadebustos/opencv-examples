@@ -9,7 +9,6 @@ import cv2
 import os
 
 def face_detection(args):
-    print(args)
     videoDev = int(args['device'])
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -65,7 +64,9 @@ def face_detection(args):
                 # some random frames will be stored
                 # (maquiavelo seal of approval)
                 random_int = random.randint(1, random_range)
+                print("\t -- %d" % random_int)
                 if random_int % modulus == 0:
+                    print(random_int)
                     # create random name
                     filename = "frame-"+ ''.join(random.choice(string.ascii_lowercase) for i in range(15))+ ".jpg"
                     filepath = os.path.join(output_dir, filename)
@@ -86,7 +87,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--device", type=int, required=True, help="video device index")
     parser.add_argument("-m", "--modulus", type=int, help="modulus")
     parser.add_argument("-r", "--range", type=int, help="random range")
-    parser.add_argument("-o", "--output_dir", help="output dir where store images")
+    parser.add_argument("-o", "--output_dir",  required=True, help="output dir where store images")
     parser.add_argument("-g", "--graphical", action="store_true", help="graphical")
     args = parser.parse_args()
 
