@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
       - name: face-recognition
-        image: quay.io/rhte_2019/face-recognition:v3
+        image: quay.io/rhte_2019/face-recognition:v1
         env:
         - name: VIDEO_INDEX
           value: '0' # /dev/video0
