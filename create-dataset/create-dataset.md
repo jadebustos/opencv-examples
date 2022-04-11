@@ -24,6 +24,6 @@ and there are two optional arguments. These arguments are used to randomly recor
 
 To avoid to have images too similar in the dataset random images will be collected.
 
-To collect them a random image will be generated from 1 to **--range** (by default 1 to 101), then this if number is 0 modulus **--modulus** (by default 7) then the image is recordered and stored in **--output_dir** using a random name.
+To collect them a random number will be generated from 1 to **--range** (by default 1 to 101), then if this number is 0 modulus **--modulus** (by default 7) then the image is recordered and stored in **--output_dir** using a random name.
 
 You are allowed to modify and play with **--range** and **--modulus**.
