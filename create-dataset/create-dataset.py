@@ -12,6 +12,7 @@ import os
 
 def face_detection(args):
     output_dir = '/srv/video/output'
+    output_dir = '/home/jadebustos/working/demo-ai'
     videoDev = int(args['device'])
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -53,16 +54,15 @@ def face_detection(args):
             try:
                 # to avoid creating images which are too similar only
                 # some random frames will be stored
-                random_int = random.randint(0,70)
-                # 4% of frames will be selected (maquiavelo seal of approval)
-                for i in range(1,31):
-                    if i % 7 == 0:
-                        # create random name
-                        filename = "frame"+ ''.join(random.choice(string.ascii_lowercase) for i in range(15))+ ".jpg"
-                        filepath = os.path.join(output_dir, filename)
-                        cv2.imwrite(filepath, frame[y:y+h, x:x+w])
-            except:
-                pass
+                # (maquiavelo seal of approval)
+                random_int = random.randint(1,101)
+                if random_int % 7 == 0:
+                    # create random name
+                    filename = "frame-"+ ''.join(random.choice(string.ascii_lowercase) for i in range(15))+ ".jpg"
+                    filepath = os.path.join(output_dir, filename)
+                    cv2.imwrite(filepath, frame[y:y+h, x:x+w])
+            except Exception as e:
+                print(e)
 
         # When everything is done, release the capture
         video_capture.release()

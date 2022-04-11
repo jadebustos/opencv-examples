@@ -95,7 +95,7 @@ RUN set -ex \
         tesseract-devel \
         kernel-headers \
     && dnf -q remove epel-release -y \
-    && dnf -q clean all \\
+    && dnf -q clean all \
     && mkdir -p /srv/video/output
 
 WORKDIR /srv/video
