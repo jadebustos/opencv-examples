@@ -97,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--device", type=int, required=True, help="video device index")
     parser.add_argument("-g", "--graphical", action="store_true", help="graphical")
     parser.add_argument("-m", "--modulus", type=int, default=23, help="modulus (default 23)")
-    parser.add_argument("-o", "--output_dir", required=True, help="output dir where store images")
+    parser.add_argument("-o", "--output_dir", default='/srv/video/output', help="output dir where store images")
     parser.add_argument("-r", "--range", type=int, default=101, help="random range (default 101)")
     parser.add_argument("-s", "--size", type=int, default=200, help="minimum image size (default 200)")
     parser.add_argument("-t", "--height", type=int, default=720, help="height resolution for camera (default 720)")

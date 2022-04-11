@@ -7,13 +7,12 @@ To use in standalone mode you will need to have installed OpenCV in your laptop.
 To execute it:
 
 ```console
-$ python create-dataset.py --device 5 --modulus 17 --range 101 --size 500 --output_dir /home/jadebustos/working/demo-ai/
+$ python create-dataset.py --device 5 --modulus 17 --range 101 --size 500 --width 1920 --height 1080 --output_dir /home/jadebustos/working/demo-ai/
 ```
 
-where there are two mandatory arguments:
+where there is one mandatory argument:
 
 * **--device 5** indicates de video device to be used. In this case **/dev/video5**. [Check this](../face-detection/face-detection-video.md) for more information.
-* **--output_dir /home/jadebustos/working/demo-ai/** the local directory where to store the images from the webcam.
 
 the optional arguments:
 
@@ -21,6 +20,9 @@ the optional arguments:
 * **--modulus 17** when a random number modulus this value is zero a image is recordered.
 * **--size 500** it is the minimal size for the image to set stored (500x500).
 * **--graphical** when execute using X11 a window will be launched to show what camera is broadcasting.
+* **--width 1920** width resolution for camera.
+* **--height 1080** height resolution for camera.
+* **--output_dir /home/jadebustos/working/demo-ai/** the local directory where to store the images from the webcam.
 
 You can run this container when you are working to store the images. To have as much variability as possible in the dataset try to:
 
