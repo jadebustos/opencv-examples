@@ -22,7 +22,7 @@ def face_detection(args):
 
     if video_capture.isOpened():
         while True:
-            # Capture frame-by-frame
+            # capture frames from webcam
             ret, frame = video_capture.read()
         
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -34,11 +34,11 @@ def face_detection(args):
                     minSize=(30, 30),
                     )
 
-            # Draw a rectangle around the faces
+            # draw a rectangle around the faces
             for (x, y, w, h) in faces:
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-            # Display the resulting frame
+            # display the resulting frame when X11 is used
             if args['graphical'] == True:
                 cv2.imshow('Video', frame)
 
@@ -51,7 +51,7 @@ def face_detection(args):
             except Exception as e:
                 print(e)
 
-        # When everything is done, release the capture
+        # when everything is done, release the capture
         video_capture.release()
         cv2.destroyAllWindows()
     else:
