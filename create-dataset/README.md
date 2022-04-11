@@ -38,7 +38,7 @@ Each person which want to be used for face recognition will need to follow:
 
 > ![TIP](../imgs/tip-icon.png) You can run this container when you are working to store the images. To have as much variability as possible in the dataset try to:
 >
-> * Use in different days, using a different T-shirt.
+> * Use in different days, using a different T-shirt (a clean one, although it is not mandatory).
 > * Try to modify your distance to the webcam.
 > * Try to smile :-D, move you head, etc.
 
