@@ -7,7 +7,8 @@ To use in standalone mode you will need to have installed OpenCV in your laptop.
 To execute it:
 
 ```console
-$ python create-dataset.py --device 5 --modulus 17 --range 101 --size 500 --width 1920 --height 1080 --output_dir /home/jadebustos/working/demo-ai/
+$ python create-dataset.py --device 5 --modulus 11 --range 101 --size 300 --width 1920 \
+                           --height 1080 --output_dir /home/jadebustos/working/demo-ai/
 ```
 
 where there is one mandatory argument:
@@ -17,18 +18,12 @@ where there is one mandatory argument:
 the optional arguments:
 
 * **--range 101** a random number in the range 1 to this vale is choosen.
-* **--modulus 17** when a random number modulus this value is zero a image is recordered.
-* **--size 500** it is the minimal size for the image to set stored (500x500).
+* **--modulus 11** when a random number modulus this value is zero a image is recordered.
+* **--size 300** it is the minimal size for the image to set stored (300x300).
 * **--graphical** when execute using X11 a window will be launched to show what camera is broadcasting.
 * **--width 1920** width resolution for camera.
 * **--height 1080** height resolution for camera.
 * **--output_dir /home/jadebustos/working/demo-ai/** the local directory where to store the images from the webcam.
-
-You can run this container when you are working to store the images. To have as much variability as possible in the dataset try to:
-
-* Use in different days, using a different T-shirt.
-* Try to modify your distance to the webcam.
-* Try to smile :-D, move you head, etc.
 
 ## Understanding how often images are recordered (trying to)
 

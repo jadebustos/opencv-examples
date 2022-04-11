@@ -32,7 +32,13 @@ Each person which want to be used for face recognition will need to follow:
    * **OUTPUT_DIR=/srv/video/output** when running the container **DO NOT CHANGE** this value.
    * **-v /home/jadebustos/working/demo-ai/:/srv/video/output:Z** change **/home/jadebustos/working/demo-ai/** for the local directory where do you want the images to be stored. This directory will be mapped to **/srv/video/output** in the container.
 
-![TIP](../imgs/tip-icon.png) The bigger resolution the bigger images. This will allow that the image for the detectec face will be the biggest possible.
+> ![TIP](../imgs/tip-icon.png) The bigger resolution the bigger images. This will allow that the image for the detectec face will be the biggest possible.
 
-![TIP](../imgs/important-icon.png) We would ideally like face images of 500x500 or bigger. The bigger the best. Try to get images of at least 300x300.
+> ![TIP](../imgs/important-icon.png) We would ideally like face images of 500x500 or bigger. The bigger the best. Try to get images of at least 300x300.
+
+> ![TIP](../imgs/tip-icon.png) You can run this container when you are working to store the images. To have as much variability as possible in the dataset try to:
+>
+> * Use in different days, using a different T-shirt.
+> * Try to modify your distance to the webcam.
+> * Try to smile :-D, move you head, etc.
 
