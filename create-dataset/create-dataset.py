@@ -18,7 +18,7 @@ def face_detection(args):
     else:
         output_dir = args['output_dir']
     if args['modulus'] == None:
-        modulus = 17
+        modulus = 23
     else:
         modulus = int(args['modulus'])
     if args['range'] == None:
@@ -29,15 +29,26 @@ def face_detection(args):
         image_size = 200
     else:
         image_size = int(args['size'])
+    if args['width'] == None:
+        width = 1280
+    else:
+        width = int(args['width'])
+    if args['height'] == None:
+        height = 720
+    else:
+        height = int(args['height'])
 
     # gauss dev=1 (internal)
     # ramanujan dev=2 (logitech)
     # archimedes dev=5 (logitech)
     try:
-        video_capture = cv2.VideoCapture(videoDev)
+        video_capture = cv2.VideoCapture(videoDev, cv2.CAP_ANY)
     except:
         print("Error opening video device")
 
+    # setting camera resolution
+    video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, width);
+    video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height);
     if video_capture.isOpened():
         cam_width = video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
         cam_height = video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -100,10 +111,12 @@ if __name__ == "__main__":
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-d", "--device", type=int, required=True, help="video device index")
     parser.add_argument("-g", "--graphical", action="store_true", help="graphical")
-    parser.add_argument("-m", "--modulus", type=int, help="modulus")
-    parser.add_argument("-o", "--output_dir",  required=True, help="output dir where store images")
-    parser.add_argument("-r", "--range", type=int, help="random range")
-    parser.add_argument("-s", "--size", type=int, help="minimum image size")
+    parser.add_argument("-m", "--modulus", type=int, help="modulus (default 23)")
+    parser.add_argument("-o", "--output_dir", required=True, help="output dir where store images")
+    parser.add_argument("-r", "--range", type=int, help="random range (default 101)")
+    parser.add_argument("-s", "--size", type=int, help="minimum image size (default 200)")
+    parser.add_argument("-t", "--height", type=int, help="height resolution for camera (default 720)")
+    parser.add_argument("-w", "--width", type=int, help="width resolution for camera (default 1280)")
     args = parser.parse_args()
 
     face_detection(vars(args))

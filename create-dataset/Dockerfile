@@ -25,12 +25,12 @@ RUN set -ex \
         tbb tbb-devel \
         python3-numpy python3-devel \
         kernel-headers \
-    && dnf -q install epel-release -y \
+    && dnf -q install epel-release http://repo.okay.com.mx/centos/8/x86_64/release/okay-release-1-5.el8.noarch.rpm -y \
     && dnf config-manager --set-enabled powertools \
     && dnf -q install -y hdf5 openjpeg2 openjpeg2-devel \
         eigen3 openblas openblas-devel protobuf \
         protobuf-devel tesseract tesseract-devel \
-        tesseract-langpack-por \
+        tesseract-langpack-por v4l-utils\
     && wget -q https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip -O opencv.zip \
     && wget -q https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O opencv_contrib.zip \
     && unzip -qq opencv.zip -d /opt && rm -rf opencv.zip \
@@ -94,7 +94,8 @@ RUN set -ex \
         protobuf-devel \
         tesseract-devel \
         kernel-headers \
-    && dnf -q remove epel-release -y \
+        remove epel-release \
+        okay-release-1-5 \
     && dnf -q clean all \
     && mkdir -p /srv/video/output
 
