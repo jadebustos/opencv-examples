@@ -64,9 +64,7 @@ def face_detection(args):
                 # some random frames will be stored
                 # (maquiavelo seal of approval)
                 random_int = random.randint(1, random_range)
-                print("\t -- %d" % random_int)
                 if random_int % modulus == 0:
-                    print(random_int)
                     # create random name
                     filename = "frame-"+ ''.join(random.choice(string.ascii_lowercase) for i in range(15))+ ".jpg"
                     filepath = os.path.join(output_dir, filename)
