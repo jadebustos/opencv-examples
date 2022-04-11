@@ -15,7 +15,10 @@ Each person which want to be used for face recognition will need to follow:
 * Run the container image:
 
    ```console
-   $ podman run --rm --env VIDEO_INDEX=5 --env MODULUS=11 --env RANDOM_RANGE=101 --env OUTPUT_DIR=/srv/video/output --env IMAGE_SIZE=300 --env WIDTH=1920 --env HEIGHT=1080 --privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts -v /home/jadebustos/working/demo-ai/:/srv/video/output:Z -d quay.io/rhte_2019/face-dataset:v1
+   $ podman run --rm --env VIDEO_INDEX=5 --env MODULUS=11 --env RANDOM_RANGE=101 \
+            --env OUTPUT_DIR=/srv/video/output --env IMAGE_SIZE=300 --env WIDTH=1920 \
+            --env HEIGHT=1080--privileged -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
+            -v /home/jadebustos/working/demo-ai/:/srv/video/output:Z -d quay.io/rhte_2019/face-dataset:v1
    ```
 
    where:
