@@ -20,6 +20,12 @@ and there are two optional arguments. These arguments are used to randomly recor
 * **--range 101** a random number in the range 1 to this vale is choosen.
 * **--modulus 7** when a random number modulus this value is zero a image is recordered.
 
+You can run this container when you are working to store the images. To have as much variability as possible in the dataset try to:
+
+* Use in different days, using a different T-shirt.
+* Try to modify your distance to the webcam.
+* Try to smile :-D, move you head, etc.
+
 ## Understanding how often images are recordered (trying to)
 
 To avoid to have images too similar in the dataset random images will be collected.
