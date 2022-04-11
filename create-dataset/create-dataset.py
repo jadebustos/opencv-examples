@@ -13,36 +13,22 @@ def face_detection(args):
     videoDev = int(args['device'])
     cascPath = 'haarcascade_frontalface_default.xml'
     faceCascade = cv2.CascadeClassifier(cascPath)
-    if args['output_dir'] == None:
-        output_dir = '/srv/video/output'
-    else:
-        output_dir = args['output_dir']
-    if args['modulus'] == None:
-        modulus = 23
-    else:
-        modulus = int(args['modulus'])
-    if args['range'] == None:
-        random_range = 101
-    else:
-        random_range = int(args['range'])
-    if args['size'] == None:
-        image_size = 200
-    else:
-        image_size = int(args['size'])
-    if args['width'] == None:
-        width = 1280
-    else:
-        width = int(args['width'])
-    if args['height'] == None:
-        height = 720
-    else:
-        height = int(args['height'])
+    output_dir = args['output_dir']
+    modulus = int(args['modulus'])
+    random_range = int(args['range'])
+    image_size = int(args['size'])
+    width = int(args['width'])
+    height = int(args['height'])
+
+    # print args
+    print(args)
 
     # gauss dev=1 (internal)
     # ramanujan dev=2 (logitech)
     # archimedes dev=5 (logitech)
     try:
-        video_capture = cv2.VideoCapture(videoDev, cv2.CAP_ANY)
+        #video_capture = cv2.VideoCapture(videoDev, cv2.CAP_ANY)
+        video_capture = cv2.VideoCapture(videoDev, cv2.CAP_V4L)
     except:
         print("Error opening video device")
 
@@ -64,18 +50,17 @@ def face_detection(args):
                     gray,
                     scaleFactor=1.1,
                     minNeighbors=5,
-                    #minSize=(30, 30),
                     minSize=(image_size, image_size),
                     )
 
             # draw a rectangle around the faces
             for (x, y, w, h) in faces:
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            
-            # if image is fewer than image_size x image_size discard image
-#            if w < image_size or h < image_size:
-#                print("Image too small (%d x %d)." % (w,h))
-#                continue
+
+            # if image is smaller than image_size x image_size discard image
+            if w < image_size or h < image_size:
+                print("Image too small (%d x %d)." % (w,h))
+                continue
 
             # display the resulting frame when X11 is used
             if args['graphical'] == True:
@@ -111,12 +96,12 @@ if __name__ == "__main__":
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-d", "--device", type=int, required=True, help="video device index")
     parser.add_argument("-g", "--graphical", action="store_true", help="graphical")
-    parser.add_argument("-m", "--modulus", type=int, help="modulus (default 23)")
+    parser.add_argument("-m", "--modulus", type=int, default=23, help="modulus (default 23)")
     parser.add_argument("-o", "--output_dir", required=True, help="output dir where store images")
-    parser.add_argument("-r", "--range", type=int, help="random range (default 101)")
-    parser.add_argument("-s", "--size", type=int, help="minimum image size (default 200)")
-    parser.add_argument("-t", "--height", type=int, help="height resolution for camera (default 720)")
-    parser.add_argument("-w", "--width", type=int, help="width resolution for camera (default 1280)")
+    parser.add_argument("-r", "--range", type=int, default=101, help="random range (default 101)")
+    parser.add_argument("-s", "--size", type=int, default=200, help="minimum image size (default 200)")
+    parser.add_argument("-t", "--height", type=int, default=720, help="height resolution for camera (default 720)")
+    parser.add_argument("-w", "--width", type=int, default=1280, help="width resolution for camera (default 1280)")
     args = parser.parse_args()
 
     face_detection(vars(args))
