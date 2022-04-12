@@ -42,3 +42,5 @@ Each person which want to be used for face recognition will need to follow:
 > * Try to modify your distance to the webcam.
 > * Try to smile :-D, move you head, etc.
 
+> ![TIP](../imgs/important-icon.png) You can use the script [start-recording.sh](start-recording.sh).
+
