@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # configure according to your environment
-MY_VIDEO_INDEX=5
+MY_VIDEO_INDEX=1
 MY_MODULUS=17
 MY_RANDOM_RANGE=101
 MY_IMAGE_SIZE=400
