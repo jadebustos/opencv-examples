@@ -54,13 +54,16 @@ def face_detection(args):
                     )
 
             # draw a rectangle around the faces
-            for (x, y, w, h) in faces:
-                cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            try:
+                for (x, y, w, h) in faces:
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-            # if image is smaller than image_size x image_size discard image
-            if w < image_size or h < image_size:
-                print("Image too small (%d x %d)." % (w,h))
-                continue
+                # if image is smaller than image_size x image_size discard image
+                if w < image_size or h < image_size:
+                    print("Image too small (%d x %d)." % (w,h))
+                    continue
+            except Exception as e:
+                print(e)
 
             # display the resulting frame when X11 is used
             if args['graphical'] == True:
