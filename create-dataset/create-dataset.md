@@ -2,7 +2,7 @@
 
 This script will use a webcam to create a dataset of your face.
 
-To use in standalone mode you will need to have installed OpenCV in your laptop. [README.md](A container is provider to use it).
+To use in standalone mode you will need to have installed OpenCV in your laptop. [A container is provider to use it](README.md).
 
 To execute it:
 
