@@ -41,15 +41,16 @@ def face_detection(args):
             for (x, y, w, h) in faces:
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-            # if image is fewer than image_size x image_size discard image
-            if w < image_size or h < image_size:
-                print("Image too small (%d x %d)." % (w,h))
-                continue
+                # if image is fewer than image_size x image_size discard image
+                if w < image_size or h < image_size:
+                    print("Image too small (%d x %d)." % (w,h))
+                    continue
 
             # display the resulting frame when X11 is used
             if args['graphical'] == True:
                 cv2.imshow('Video', frame)
 
+                # quit when q is pressed
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
