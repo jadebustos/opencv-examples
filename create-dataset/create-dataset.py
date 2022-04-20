@@ -58,10 +58,10 @@ def face_detection(args):
                 for (x, y, w, h) in faces:
                     cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-                # if image is smaller than image_size x image_size discard image
-                if w < image_size or h < image_size:
-                    print("Image too small (%d x %d)." % (w,h))
-                    continue
+                    # if image is smaller than image_size x image_size discard image
+                    if w < image_size or h < image_size:
+                        print("Image too small (%d x %d)." % (w,h))
+                        continue
             except Exception as e:
                 print(e)
 
